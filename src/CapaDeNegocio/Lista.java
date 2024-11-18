@@ -70,19 +70,75 @@ public class Lista {
             }
         }
     }
-
+    
+    public void eliminar(int elemento){
+        if (!vacia()) {
+            Nodo aux=L;
+            Nodo ant=null;
+            while ((aux!=null)&&(aux.getDato()!=elemento)) {   
+                ant=aux;
+                aux=aux.getEnlace();
+            }
+            if (ant==null) {
+             L=aux.getEnlace();
+             cantidad--;
+                
+                
+                
+            }else{
+                if (aux!=null) {
+                   // System.out.println("ant"+ant.toString());
+                    //System.out.println("aux"+aux.toString());
+                    //System.out.println("aux.getEnlace()"+aux.getEnlace().toString());
+                    ant.setEnlace(aux.getEnlace());
+                    cantidad--;
+                }
+ 
+            }
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    public boolean existe(int elemento){
+        Nodo aux=L;
+        while ((aux!=null)&& (aux.getDato()!=elemento)) {            
+            aux=aux.getEnlace();
+        }
+        return (aux!=null);
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //main
     public static void main(String[] args) {
         Lista listaPrueba = new Lista();
         listaPrueba.insertar(2);
-        System.out.println(listaPrueba.toString());
+        //System.out.println(listaPrueba.toString());
 
         listaPrueba.insertar(4);
-        System.out.println(listaPrueba.toString());
+        //System.out.println(listaPrueba.toString());
 
-        listaPrueba.insertar(1);
+        listaPrueba.insertar(1); 
         System.out.println(listaPrueba.toString());
-
+           listaPrueba.insertar(5); 
+        System.out.println(listaPrueba.toString());
+        listaPrueba.eliminar(1);
+        System.out.println(listaPrueba.toString());
+        
+      
     }
 
 }
