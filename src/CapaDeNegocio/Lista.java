@@ -64,6 +64,7 @@ public class Lista {
                 if (ant.getDato() != elemento) {
                     Nodo nuevoNodo = new Nodo(elemento);
                     ant.setEnlace(nuevoNodo);
+                    nuevoNodo.setEnlace(act);
                     cantidad++;
                 }
 
@@ -98,13 +99,7 @@ public class Lista {
         }
         
     }
-    
-    
-    
-    
-    
-    
-    
+   
     public boolean existe(int elemento){
         Nodo aux=L;
         while ((aux!=null)&& (aux.getDato()!=elemento)) {            
@@ -115,6 +110,40 @@ public class Lista {
     }
     
     
+ public void invertir(){
+     Nodo ant=null;
+     Nodo aux=L;
+     Nodo pos=aux.getEnlace();
+     while (pos!=null) {     
+         aux.setEnlace(ant);
+         //cambios de punteros
+         ant=aux;
+         aux=pos;
+         pos=pos.getEnlace();
+     }
+     aux.setEnlace(ant);
+     L=aux;
+ }
+  
+    
+    public void invertirR(){
+        invertirAmigo(L);
+    }
+    
+    
+    private void invertirAmigo(Nodo nodoActual) {
+        if (nodoActual==null) {
+            //nada
+        }else{
+            if (nodoActual.getEnlace()==null) {//tiene un nodo
+               L=nodoActual;
+            }else{
+                invertirAmigo(nodoActual.getEnlace());
+                nodoActual.getEnlace().setEnlace(nodoActual);
+                nodoActual.setEnlace(null);
+            }
+        }       
+    }
     
     
     
@@ -122,23 +151,30 @@ public class Lista {
     
     
     
+    
+    
+    
+ 
+ 
+ 
+ 
+ 
     //main
     public static void main(String[] args) {
         Lista listaPrueba = new Lista();
         listaPrueba.insertar(2);
         //System.out.println(listaPrueba.toString());
-
         listaPrueba.insertar(4);
         //System.out.println(listaPrueba.toString());
-
         listaPrueba.insertar(1); 
+        //System.out.println(listaPrueba.toString());
+           listaPrueba.insertar(3); 
         System.out.println(listaPrueba.toString());
-           listaPrueba.insertar(5); 
-        System.out.println(listaPrueba.toString());
-        listaPrueba.eliminar(1);
+        listaPrueba.invertirR();
         System.out.println(listaPrueba.toString());
         
       
     }
+
 
 }
