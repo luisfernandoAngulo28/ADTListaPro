@@ -267,7 +267,37 @@ private void intercambiarDea2RAmigo(Nodo actual) {
             }
         }
     }
-    
+  public void intercambiar2en2(){
+      if (cantidad()>2) {
+          Nodo ant=L;
+          Nodo aux=L.getEnlace();//ant.getEnlace();
+          Nodo pos=aux.getEnlace();
+          while (pos!=null) {              
+             aux.setEnlace(pos.getEnlace());
+             pos.setEnlace(aux);
+             ant.setEnlace(pos);
+              System.out.println(ant.toString());
+             //------------------
+             //Actualizacion de punteros
+             ant=aux;
+             aux=aux.getEnlace();
+             if(aux!=null){
+                pos=aux.getEnlace();
+             }else{
+                pos=null; 
+             }
+             
+          }
+      }
+  }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
     
     
     
@@ -294,7 +324,7 @@ private void intercambiarDea2RAmigo(Nodo actual) {
             listaPrueba.insertar(elemento);
         }
         System.out.println(listaPrueba.toString());
-        listaPrueba.intercambiar2V4();
+        listaPrueba.intercambiar2en2();
         System.out.println(listaPrueba.toString());
 
     }
