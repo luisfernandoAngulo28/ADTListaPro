@@ -189,9 +189,9 @@ public class Lista {
         }
 
     }
-    
+
     public void intercambiar2V3() {//12345
-        if (cantidad()>1) {
+        if (cantidad() > 1) {
             Nodo aux = L;
             Nodo pos = L.getEnlace();//aux.getEnlace();
             Nodo ant = null;//
@@ -214,36 +214,30 @@ public class Lista {
         }
 
     }
-    
-    
-    
-    
-    
-public void intercambiarDea2R(){//oficial
-    intercambiarDea2RAmigo(L);
-}
 
-private void intercambiarDea2RAmigo(Nodo actual) {
-    if (actual==null) {
-      L=actual;    
-    }else{
-        if (actual.getEnlace()==null) {
-            L=actual;
-        }else{
-            intercambiarDea2RAmigo(actual.getEnlace().getEnlace());
-            actual.getEnlace().setEnlace(L);
-            Nodo sig=actual.getEnlace();
-            actual.setEnlace(sig.getEnlace());
-            sig.setEnlace(actual);
-            L=sig;
-            
-            
-            
+    public void intercambiarDea2R() {//oficial
+        intercambiarDea2RAmigo(L);
+    }
+
+    private void intercambiarDea2RAmigo(Nodo actual) {
+        if (actual == null) {
+            L = actual;
+        } else {
+            if (actual.getEnlace() == null) {
+                L = actual;
+            } else {
+                intercambiarDea2RAmigo(actual.getEnlace().getEnlace());
+                actual.getEnlace().setEnlace(L);
+                Nodo sig = actual.getEnlace();
+                actual.setEnlace(sig.getEnlace());
+                sig.setEnlace(actual);
+                L = sig;
+
+            }
         }
     }
-}    
-  
- public void  intercambiar2V4() {
+
+    public void intercambiar2V4() {//no mia
         if (cantidad > 1) {
             Nodo aux1 = L;
             Nodo aux2 = L.getEnlace();
@@ -267,49 +261,83 @@ private void intercambiarDea2RAmigo(Nodo actual) {
             }
         }
     }
-  public void intercambiar2en2(){
-      if (cantidad()>2) {
-          Nodo ant=L;
-          Nodo aux=L.getEnlace();//ant.getEnlace();
-          Nodo pos=aux.getEnlace();
-          while (pos!=null) {              
-             aux.setEnlace(pos.getEnlace());
-             pos.setEnlace(aux);
-             ant.setEnlace(pos);
-              System.out.println(ant.toString());
-             //------------------
-             //Actualizacion de punteros
-             ant=aux;
-             aux=aux.getEnlace();
-             if(aux!=null){
-                pos=aux.getEnlace();
-             }else{
-                pos=null; 
-             }
-             
-          }
-      }
-  }
- 
- 
- 
- 
- 
- 
- 
- 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
+    public void intercambiar2en2() {
+        if (cantidad() > 2) {
+            Nodo ant = L;
+            Nodo aux = L.getEnlace();//ant.getEnlace();
+            Nodo pos = aux.getEnlace();
+            while (pos != null) {
+                aux.setEnlace(pos.getEnlace());
+                pos.setEnlace(aux);
+                ant.setEnlace(pos);
+                System.out.println(ant.toString());
+                //------------------
+                //Actualizacion de punteros
+                ant = aux;
+                aux = aux.getEnlace();
+                if (aux != null) {
+                    pos = aux.getEnlace();
+                } else {
+                    pos = null;
+                }
+
+            }
+        }
+    }
+    /*
+    cant=par
+    L->[1|]->[2|]->[3|]->[4|]->null
+    L->[2|]->[1|]->[4|]->[3|]->null
+    cantidad=impar
+    */
+   //1.Analizar cuantos punteros usare
+    public void invertirLista() {
+        if (cantidad > 1) {
+            Nodo ant, aux;
+            if (cantidad % 2 == 0) { //2.Inicializar los punteros              
+                ant = null;
+                aux = L;
+            } else {
+                ant = L;
+                aux = L.getEnlace();
+            }
+                while(aux != null)  { // 3.recorrer la lista
+                    Nodo sig = aux.getEnlace();
+                    //4.mover Enlaces
+                    aux.setEnlace(sig.getEnlace());
+                    sig.setEnlace(aux);
+                    //5.pasos claves
+                    if(aux == L)
+                    {//no
+                        L = sig;
+                    }else{
+                        ant.setEnlace(sig);
+                    }
+                    //6.cambiar de posicion los punteros
+                    ant = aux;
+                    aux = aux.getEnlace();
+                }
+            }    
+    }
+    
+    /*Resumen
+    pasos
+    1.Analizar cuantos punteros usare
+    2.Inicializar los punteros
+    3.recorrer la lista
+    4.mover enlaces
+    5.pasos clave
+    6.cambiar punteros de lugar
+    
+    
+    
+    
+    */
+    
+    
     //main
+
     public static void main(String[] args) {
         Lista listaPrueba = new Lista();
         /*  listaPrueba.insertar(2);
@@ -324,11 +352,9 @@ private void intercambiarDea2RAmigo(Nodo actual) {
             listaPrueba.insertar(elemento);
         }
         System.out.println(listaPrueba.toString());
-        listaPrueba.intercambiar2en2();
+        listaPrueba.invertirLista();
         System.out.println(listaPrueba.toString());
 
     }
-
-   
 
 }
